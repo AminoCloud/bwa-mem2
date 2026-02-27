@@ -1,0 +1,31 @@
+apiVersion: aminocloud.io/v1
+kind: PipelineOperator
+metadata:
+  name: BWA-MEM2
+  description: "Next-generation BWA aligner optimized for Illumina short reads. Maps sequencing reads against a reference genome with high speed and accuracy."
+  version: "2.2.1"
+  author: Heng Li / Intel
+  category: alignment
+  instrumentModes: [illumina]
+  tags: [alignment, mapping, bwa]
+inputs:
+  - id: fastq_in
+    name: FASTQ Reads
+    dataType: FASTQ
+    required: true
+  - id: ref_in
+    name: Reference Genome
+    dataType: FASTA
+    required: true
+outputs:
+  - id: bam_out
+    name: Aligned BAM
+    dataType: BAM
+compute:
+  cpu: 8
+  memoryGb: 32
+  gpuRequired: false
+  estimatedMinutes: 60
+docker:
+  image: acr.aminocloud.io/aminocloud/bwa-mem2
+  tag: "2.2.1"
